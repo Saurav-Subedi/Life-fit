@@ -1,0 +1,205 @@
+/* styles.css */
+
+/* Define styles for the main content area */
+#main-content {
+    padding-top: 70px;
+}
+
+/* Styles for the shopping cart items */
+.cart-item {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.cart-item img {
+    max-width: 150px;
+    max-height: 150px;
+    margin-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item .item-details {
+    flex-grow: 1;
+}
+
+.cart-item h5 {
+    font-size: 1.25rem;
+}
+
+.cart-item p {
+    font-size: 0.875rem;
+}
+
+.cart-item .quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item .quantity-control a {
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin: 0 10px;
+}
+
+.cart-item .remove-item {
+    margin-top: 10px;
+}
+
+.cart-item .item-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Styles for the total amount section */
+#total-amount-section {
+    margin-top: 30px;
+}
+
+#total-amount-section .total-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#total-amount-section a {
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Styles for the payment section */
+#payment-section {
+    margin-top: 30px;
+}
+
+#payment-section .payment-image {
+    max-width: 100%;
+}
+
+#payment-section p {
+    font-size: 1rem;
+}
+/* Styles for the shopping cart items */
+.cart-item {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-item img {
+    max-width: 150px;
+    max-height: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item .item-details {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item h5 {
+    font-size: 1.25rem;
+}
+
+.cart-item p {
+    font-size: 0.875rem;
+}
+
+.cart-item .quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item .quantity-control a {
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin: 0 10px;
+}
+
+.cart-item .remove-item {
+    margin-top: 10px;
+}
+
+.cart-item .remove-button {
+    background-color: #ff0000; /* Add your preferred button styling */
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Other styles for total amount and payment sections... */
+/* Styles for the total amount section */
+#total-amount-section {
+    margin-top: 30px;
+}
+
+#total-amount-section .card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
+
+#total-amount-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+#total-amount-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#total-amount-section ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+#total-amount-section a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+/* Styles for the payment section */
+#payment-section {
+    margin-top: 30px;
+}
+
+#payment-section .card-body {
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+#payment-section h5 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+#payment-section .payment-image {
+    max-width: 100%;
+    display: block;
+    margin-top: 10px;
+}
+
+#payment-section p {
+    font-size: 1rem;
+    margin-top: 10px;
+}

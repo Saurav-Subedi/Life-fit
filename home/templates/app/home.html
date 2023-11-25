@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'app/css/home.css' %}">
+{% endblock %}
+{% block livesale %}
+
+
+
+<div class="scroll-up-btn">
+  <i class="fas fa-angle-up"></i>
+</div>
+<div class="intro">
+  <div class="logo">
+    <img src="{% static '' %}" alt="Logo">
+  </div>
+</div>
+
+<div class="sub-header">
+  <button class="active">Trademills</button>
+  <button class="active">Dumbbells</button>
+  <button class="active">Pull-Up Bars</button>
+  <button class="active">Weight Benches</button>
+</div>
+<div>
+<h2>All Products</h2>
+<div id="content">
+    <div class="gallery">
+      {% for product in products %}
+      <div class="content">
+        <a href="{% url 'product-detail' product.id %}">
+                <img src="{{ product.product_image.url }}" alt="" >
+                <h3>{{ product.title }}</h3>
+                {{ product.short_description|safe }}
+                <h6>रु.{{ product.selling_price }}</h6>
+                <ul>
+                    <li><i class="fa fa-star checked"></i></li>
+                    <li><i class="fa fa-star checked"></i></li>
+                    <li><i class="fa fa-star checked"></i></li>
+                    <li><i class="fa fa-star checked"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+                <button class="buy-{{ forloop.counter }}">Buy Now</button>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock livesale %}
+
+{% block main-content %}
+
+
+
+{% endblock main-content %}

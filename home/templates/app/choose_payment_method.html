@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+{% block title %}Choose Payment Method{% endblock title %}
+
+{% block main-content %}
+<div class="container mt-4">
+    <h1>Choose Payment Method</h1>
+    <p>Select your preferred payment method to complete the order:</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment_method" id="cash-on-delivery" value="cash">
+            <label class="form-check-label" for="cash-on-delivery">
+                Cash On Delivery
+            </label>
+        </div>
+
+        <!-- You can add more payment options here if needed -->
+
+        <button type="submit" class="btn btn-primary mt-3">Place Order</button>
+    </form>
+</div>
+{% endblock main-content %}

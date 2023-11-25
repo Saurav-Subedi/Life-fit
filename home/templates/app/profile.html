@@ -1,0 +1,27 @@
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block main-content %}
+<div class="container" style="padding-top: 50px;">
+  <div>
+    <h3 class=" ">Welcome <span >{{request.user}} :</span></h3>
+    <hr>
+    <div>
+      <ul>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        <li><a href="{% url 'passwordchange' %}">Password Change</a></li>
+
+        {% comment %} <li><a href="{% url 'home:address' %}">Address</a></li> {% endcomment %}
+      </ul>
+    </div>
+    <div>
+      <h1>Add Delivery Address</h1>
+      <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

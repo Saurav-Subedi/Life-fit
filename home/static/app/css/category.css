@@ -1,0 +1,32 @@
+/* Custom CSS for Category Dropdown */
+/* Style the dropdown menu */
+.dropdown-menu {
+    background-color: #fff; /* Background color of the dropdown menu */
+    border: 1px solid #ccc; /* Border around the dropdown menu */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for the dropdown menu */
+}
+
+/* Style the dropdown items */
+.dropdown-item {
+    color: #333; /* Text color of the dropdown items */
+    padding: 10px 20px; /* Spacing inside the dropdown items */
+    transition: background-color 0.3s; /* Smooth background color transition on hover */
+}
+
+.dropdown-item:hover {
+    background-color: #f8f8f8; /* Background color on hover */
+}
+
+/* Style the "No Posts" badge */
+.badge-danger {
+    background-color: #f00; /* Background color of the badge */
+    color: #fff; /* Text color of the badge */
+    font-size: 12px; /* Font size of the badge */
+    padding: 4px 8px; /* Spacing inside the badge */
+    margin-left: 10px; /* Margin between category name and badge */
+}
+
+/* Disable pointer events for disabled items */
+.dropdown-item.disabled {
+    pointer-events: none;
+}

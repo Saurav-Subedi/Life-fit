@@ -1,0 +1,15 @@
+
+<h1>My Delivery Addresses</h1>
+<ul>
+    {% for address in addresses %}
+        <li>
+            {{ address.full_name }} - {{ address.mobile_number }}<br>
+            {{ address.address }}, {{ address.landmark }}<br>
+            {{ address.area }}, {{ address.city }}, {{ address.province }}<br>
+            <a href="{% url 'edit_address' address.id %}">Edit</a>
+            <a href="{% url 'delete_address' address.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'add_address' %}">Add New Address</a>

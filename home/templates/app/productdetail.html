@@ -1,0 +1,85 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Product Detail{% endblock title %}
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'app/css/product.css' %}">
+<script src="{% static 'app/js/product.js' %}"></script>
+
+{% endblock %}
+{% block main-content %}
+<div class="container" style="padding-top: 50px;">
+    <div>
+        <div>
+            <div>
+                <img src="{{product.product_image.url}}" alt="">
+            </div>
+        </div>
+        <div>
+            <h4><a href="{% url 'home' %}">Home</a> / <span>{{product.title}}</span></h4>
+            <hr>
+            <br>
+            <h4>रु. {{product.discounted_price}} <small>रु. {{product.selling_price}}</small></h4> <br>
+
+            <div class="quantity-control">
+                <button class="quantity-adjust minus" data-action="decrease">-</button>
+                <input type="number" name="quantity" class="quantity-input" value="1" min="1" step="1" data-product-id="{{ product.id }}">
+                <button class="quantity-adjust plus" data-action="increase">+</button>
+            </div>
+            <span class="updated-quantity" style="display: none;"></span>
+            
+
+            {% if request.user.is_authenticated %}
+                {% if item_already_in_cart %}
+                <a href="{% url 'showcart' %}">Go To Cart</a>
+                {% else %}
+                <form action="/add-to-cart" class="d-inline">
+                    <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+                    <button type="submit">Add To Cart</button>
+                </form>
+                {% endif %}
+            {% endif %}
+            {% if not request.user.is_authenticated %}
+                <form action="/add-to-cart">
+                    <input type="hidden" name="prod_id" value="{{product.id}}" id="prod_id">
+                    <button type="submit">Add To Cart</button>
+                </form>
+            {% endif %}
+
+            <a href="{% url 'showcart' %}">Buy Now</a>
+            <h5>Available Offers</h5>
+            <ul>
+                <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>
+                <li>Special Price Get extra रु3000 off (price inclusive of discount)</li>
+                <li>No cost EMI रु1,667/month. Standard EMI also available</li>
+                <li>Partner Offer रु000 Flipkart Gift Card on Every 1000th Transaction with a new Visa Debit/Credit Card</li>
+            </ul>
+        </div>
+        <div>
+            <p>{{product.description|safe|escape }}</p>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'app/js/cart.js' %}"></script>
+<script>
+    function updateCartQuantity(productId, action, csrfToken) {
+        $.ajax({
+          url: '/update-cart/',  // Use a single URL for both incrementing and decrementing
+          method: 'POST',  // Use POST method for all cart updates
+          headers: {
+            'X-CSRFToken': csrfToken  // Include the CSRF token in the headers
+          },
+          data: {
+            prod_id: productId,
+            action: action
+          },
+          dataType: 'json',
+          success: function (data) {
+            $('#quantity-' + productId).text(data.quantity);
+            $('#amount').text(data.amount);
+            $('#totalamount').text(data.totalamount);
+          }
+        });
+      }
+</script>
+{% endblock main-content %}

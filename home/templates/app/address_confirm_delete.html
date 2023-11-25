@@ -1,0 +1,8 @@
+
+<h1>Confirm Deletion</h1>
+<p>Are you sure you want to delete the address for {{ address.full_name }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+<a href="{% url 'addresses_list' %}">Cancel</a>

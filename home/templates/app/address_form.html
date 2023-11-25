@@ -1,0 +1,7 @@
+
+<h1>Add New Delivery Address</h1>
+<form method="post" action="{% url 'choose-payment-method' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Address</button>
+</form>

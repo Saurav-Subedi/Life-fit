@@ -1,0 +1,61 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'app/css/login.css' %}">
+{% endblock %}
+{% block main-content %}
+<div>
+    <div class="hello"> 
+        <div class="form-box login">
+            <h3 >Login on <span class="text-warning">LiveFit </span></h3>
+            <hr  style="height: 3px;">
+            {% if messages %}
+			{% for messages in messages %}
+			<div><strong>{{messages}}</strong> 
+				<button type="button" aria-label="Close">&times;</button>
+			</div>
+			{% endfor %}
+		{% endif %}
+            <form action="" method="POST" novalidate >
+                {% csrf_token %}
+                {% for fm in form %}
+                <div class="input-box">
+                    {{fm.label_tag}} {{fm}}
+                    <small class="text-danger">
+                        {{fm.errors|striptags}}
+                    </small><br>
+                </div>
+                {% endfor %}
+                <small class="remember-forgot">
+                    <a href="{% url 'password_reset' %}">Forgot Password ?</a>
+                </small><br>
+                <input type="submit"  class="register-1ink" value="Login">
+                <br>
+                <div class="login-register">
+                    <small  class="register-1ink">New to LiveFit ? <a href="{% url 'customerregistration' %}" class="text-danger">Create an
+                            Account</a>
+                    </small>
+                </div>
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Category - {{ catData.name }}{% endblock title %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'app/css/home.css' %}">
+{% endblock %}
+
+{% block main-content %}
+<h2>{{ catData.name }} Products</h2>
+<div id="content">
+    <div class="gallery">
+        {% if productData %}
+            {% for product in productData %}
+            <div class="content">
+            <a href="{% url 'product-detail' product.id %}">
+                    <img src="{{ product.product_image.url }}" alt="" height="20%">
+                    <h3>{{ product.title }}</h3>
+                    <p>{{ product.short_description|safe }}</p>
+                    <h6>रु.{{ product.selling_price }}</h6>
+                    <ul>
+                        <li><i class="fa fa-star checked"></i></li>
+                        <li><i class="fa fa-star checked"></i></li>
+                        <li><i class="fa fa-star checked"></i></li>
+                        <li><i class="fa fa-star checked"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                    </ul>
+                    <button class="buy-{{ forloop.counter }}">Buy Now</button>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <p>No products available in this category.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

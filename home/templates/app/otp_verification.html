@@ -1,0 +1,41 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}OTP Verification{% endblock title %}
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'app/css/login.css' %}">
+{% endblock %}
+{% block main-content %}
+<div>
+    <div class="hello">
+        <div class="form-box otp-verification">
+            <h3>OTP Verification for <span class="text-warning">LiveFit</span></h3>
+            <hr style="height: 3px;">
+            {% if messages %}
+            {% for message in messages %}
+            <div><strong>{{ message }}</strong>
+                <button type="button" aria-label="Close">&times;</button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form action="" method="POST" novalidate>
+                {% csrf_token %}
+                {% for fm in form %}
+                <div class="input-box">
+                    {{ fm.label_tag }} {{ fm }}
+                    <small class="text-danger">
+                        {{ fm.errors|striptags }}
+                    </small><br>
+                </div>
+                {% endfor %}
+                <input type="submit" class="verify-otp-link" value="Verify OTP">
+                <br>
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

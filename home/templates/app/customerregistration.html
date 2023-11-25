@@ -1,0 +1,48 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Customer Registration{% endblock title %}
+
+{% load static %}
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'app/css/registration.css' %}">
+{% endblock %}
+  <title>LiveFit - Sign Up</title>
+{% block main-content %}
+<div>
+
+   <div class="hello">       
+      <div class="form-box login">
+         <h3>Customer <span>Registration</span></h3>
+         <hr >
+         <form action="" method="post" novalidate >
+            {% if messages %}
+            {% for message in messages %}
+            <p {% if message.tags %} class="{{message.tags}} " {% endif %} role="alert">{{message}}
+               <button type="button" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+            </p>
+            {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            {% for fm in form %}
+            <div class="input-box">
+               {{fm.label_tag}} {{fm}}
+               <small class="text-danger">{{fm.errors|striptags}}</small> <br>
+            </div>
+            {% endfor %}
+            <input type="submit"  class="btn" value="Submit">
+            <br>
+            <div class="login-link">
+               <small>Existing User ? <a href="{% url 'login' %}" class="text-danger">Login Now</a>
+               </small>
+            </div>
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+            <p>{{error}}</p>
+            {% endfor %}
+            {% endif %}
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock main-content %}
+{% comment %} sau12_12Qx {% endcomment %}

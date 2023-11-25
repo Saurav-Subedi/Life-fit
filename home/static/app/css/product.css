@@ -1,0 +1,27 @@
+/* styles.css */
+
+/* Quantity Control Styles */
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.quantity-control input {
+    width: 40px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Other styles as needed to match daraz.com.np */
