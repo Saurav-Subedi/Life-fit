@@ -1,0 +1,14 @@
+<!-- edit_delivery_address.html -->
+
+{% comment %} {% extends 'app/base.html' %} {% endcomment %}
+{% block title %}Edit Delivery Address{% endblock %}
+
+{% block content %}
+  <h1>Edit Delivery Address</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Address</button>
+  </form>
+{% endblock %}

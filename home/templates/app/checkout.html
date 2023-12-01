@@ -64,7 +64,12 @@
             <strong>Please,</strong><br> You should Add First shipping address and Continue shopping.
             <button type="button" aria-label="Close"></button>
           </div>
-          <a href="{% url 'add_address' %}" >Add Address</a>
+          <h3>Add/Edit Address</h3>
+          <form method="post" action="{% url 'add_delivery_address' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+          </form>
+          
           {% endif %}
         </div>
 
@@ -72,37 +77,33 @@
     </div>
   </div>
 </div>
+
+
+
+
+{% for ad in addresses %}
+    <div class="card bg-dark">
+        <div class="card-body">
+            <h5>{{ ad.full_name }}</h5>
+            <p>{{ ad.address }}, {{ ad.city }}, {{ ad.area }} - {{ ad.landmark }}</p>
+            <!-- Edit Address Option -->
+            <a href="{% url 'edit_delivery_address' ad.id %}">Edit Address</a>
+            <!-- Delete Address Option -->
+            <form method="post" action="{% url 'delete_delivery_address' ad.id %}">
+                {% csrf_token %}
+                <button type="submit">Delete Address</button>
+            </form>
+        </div>
+{% endfor %}
+
+
+
+{% if addresses %}
+    <a href="{% url 'placeorder' %}">Place Order</a>
+{% else %}
+    <p>Please add a delivery address to proceed with the order.</p>
+    <a href="{% url 'add_delivery_address' %}">Add Delivery Address</a>
+{% endif %}
+
 {% endblock main-content %}
 
-{% block payment-gateway-paypal %}
-
- <!-- Include the PayPal JavaScript SDK -->
- <script src="https://www.paypal.com/sdk/js?client-id=AT9nzki8L1drIKsie1VhvuBLKF__ArTCpS6xhpwrygU3vjdSEWFVwUKh-8qQdaJyQi_lNTx_2gjyk5f5&currency=USD"></script>
-
- <script>
-     // Render the PayPal button into #paypal-button-container
-     paypal.Buttons({
-         // Set up the transaction
-          createOrder: function(data, actions) {
-                return actions.order.create({
-                  purchase_units: [{
-                    amount: {
-                      value: {{nptotal}}
-                    }
-                  }]
-                });
-          },
-         // Finalize the transaction
-         onApprove: function(data, actions) {
-             return actions.order.capture().then(function(orderData) {
-                 // Successful capture! For demo purposes:
-                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                 var transaction = orderData.purchase_units[0].payments.captures[0];
-                 alert('Transaction '+ transaction.status + ': ' + transaction.id + '\nTransaction Completed \n\n Thank you for your payment!');
-                 document.getElementById("myform").submit();
-             });
-         }
-     }).render('#paypal-button-container');
- </script>
-
-{% endblock payment-gateway-paypal %}

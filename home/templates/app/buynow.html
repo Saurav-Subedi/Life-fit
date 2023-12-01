@@ -2,5 +2,29 @@
 {% load static %}
 {% block title %}Buy Now{% endblock title %}
 {% block main-content %}
-Product Buy Now
+Product Buy Now<!-- Display order summary -->
+<h2>Order Summary</h2>
+{% for item in cart_items %}
+    <!-- Show item details: product, quantity, total price -->
+    <!-- ... -->
+{% endfor %}
+<p>Total Amount: {{ total_amount }}</p>
+
+<!-- Display delivery address -->
+<h3>Delivery Address</h3>
+{% if default_address %}
+    <!-- Show address details -->
+    <p>{{ default_address.full_name }}</p>
+    <!-- ... -->
+{% else %}
+    <p>No default address found. Please add an address.</p>
+{% endif %}
+
+<!-- Payment method selection -->
+<form method="POST" action="{% url 'place_order' %}">
+    <!-- Add payment method options -->
+    <!-- ... -->
+    <input type="submit" value="Place Order">
+</form>
+
 {% endblock main-content %}

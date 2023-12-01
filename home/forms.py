@@ -1,10 +1,9 @@
-from django import forms
+from .models import DeliveryAddress
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import password_validation
 from django import forms
-from .models import Customer
 
 
 class CustomerRegistrationForm(UserCreationForm):
@@ -66,12 +65,11 @@ class CustomerVerificationForm(forms.Form):
 class SearchForm(forms.Form):
     query = forms.CharField(label='Search')
 
-from .models import DeliveryAddress
-
 class DeliveryAddressForm(forms.ModelForm):
     class Meta:
         model = DeliveryAddress
-        fields = '__all__'  
+        fields = ['full_name', 'mobile_number', 'city', 'area', 'address', 'landmark']
+
 
 
 class ForgotPasswordForm(forms.Form):

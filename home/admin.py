@@ -13,13 +13,6 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(Customer)
-class CustomerModelAdmin(admin.ModelAdmin):
-    # list_display = ['user', 'id', 'name', 'locality', 'city', 'zipcode', 'state']
-    # list_filter = ('user', 'state')
-    search_fields = ('name', 'locality', 'city', 'zipcode')
-    list_per_page = 8
-
 
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
@@ -72,3 +65,40 @@ admin.site.register(OTP, OTPAdmin)
 
 
 
+from django.contrib import admin
+from .models import DeliveryAddress
+
+@admin.register(DeliveryAddress)
+class DeliveryAddressAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'mobile_number', 'city', 'area', 'address', 'landmark', 'user')
+    list_filter = ('city',)
+    search_fields = ('full_name', 'mobile_number', 'city', 'area', 'address', 'landmark')
+
+
+
+
+
+
+from django.contrib import admin
+from .models import Order, OrderItem
+
+# Define the OrderItem inline for better representation in the Order admin
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 0
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'total_amount', 'shipping_address', 'order_status', 'created_at', 'updated_at')
+    list_filter = ('order_status', 'created_at', 'updated_at')
+    search_fields = ('id', 'user__username', 'shipping_address__full_name')  # Add other fields for search if needed
+    inlines = [OrderItemInline]
+
+    # Customize the change view
+    fieldsets = (
+        ('Order Information', {
+            'fields': ('user', 'total_amount', 'shipping_address', 'order_status', 'shipping_cost')
+        }),
+        # Add more fieldsets for other information like payment details, etc.
+    )
+
+admin.site.register(Order, OrderAdmin)

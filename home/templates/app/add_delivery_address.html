@@ -1,6 +1,6 @@
 
 
-{% extends 'app/base.html' %}
+{% comment %} {% extends 'app/base.html' %} {% endcomment %}
 {% load static %}
 {% block title %}Customer Registration{% endblock title %}
 
@@ -9,7 +9,11 @@
 <link rel="stylesheet" href="{% static 'app/css/delivery.css' %}">
 {% endblock %}
 {% block main-content %}
-<div>
-  
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Address</button>
+</form>  
 
     {% endblock main-content %}

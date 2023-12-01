@@ -1,0 +1,17 @@
+{% block main-content %}
+    <h2>Select Payment Method</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="delivery_address">Select Delivery Address:</label>
+        <select name="delivery_address_id" id="delivery_address">
+            {% for address in delivery_addresses %}
+                <option value="{{ address.id }}">{{ address.address }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="radio" id="cod" name="payment_method" value="cash_on_delivery" checked>
+        <label for="cod">Cash on Delivery</label><br><br>
+
+        <input type="submit" value="Proceed to Confirm Order">
+    </form>
+{% endblock main-content %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Order</title>
+</head>
+<body>
+    <h2>Your Cart Items</h2>
+    <div>
+        {% if cart_items %}
+            {% for cart_item in cart_items %}
+                <div>
+                    <h3>{{ cart_item.product.title }}</h3>
+                    <p>Quantity: {{ cart_item.quantity }}</p>
+                    <p>Price: {{ cart_item.product.selling_price }}</p>
+                    <p>Total Price: {{ cart_item.total_price }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No items in the cart</p>
+        {% endif %}
+    </div>
+
+    <h3>Total Amount: {{ totalamount }}</h3>
+
+    <h3>Delivery Addresses</h3>
+    <form method="post">
+        {% csrf_token %}
+        <label for="delivery_address">Select Delivery Address:</label>
+        <select name="delivery_address_id" id="delivery_address">
+            {% for address in delivery_addresses %}
+                <option value="{{ address.id }}">{{ address.address }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="radio" id="cod" name="payment_method" value="cash_on_delivery" checked>
+        <label for="cod">Cash on Delivery</label><br><br>
+
+        <input type="submit" value="Proceed to Confirm Order">
+    </form>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>

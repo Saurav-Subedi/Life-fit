@@ -5,7 +5,7 @@ from home import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView 
 from .forms import LoginForm, MyPasswordChangeForm
-from .views import CustomerRegistrationView, OTPVerificationView  # Import the ForgotPasswordView
+from .views import CustomerRegistrationView, OTPVerificationView, OrderConfirmationView, PlaceOrderAndPaymentView, add_delivery_address, delete_delivery_address, edit_delivery_address  # Import the ForgotPasswordView
 
 
 
@@ -33,16 +33,26 @@ urlpatterns = [
     path('update-cart/', views.update_cart, name='update_cart'),
     path('remove_cart/', views.remove_cart, name='remove_cart'),
 
-    path('checkout/', views.checkout, name='checkout'),
+    # path('checkout/', views.checkout, name='checkout'),
     # path('paymentdone/', views.payment_done, name='paymentdone'),
-    path('orders/', views.orders, name='orders'),
+    # path('orders/', views.orders, name='orders'),
+
+    path('proceed-to-checkout/', views.proceed_to_checkout, name='proceed_to_checkout'),
+
 
     path('buy/', views.buy_now, name='buy-now'),
     # path('profile/', views.ProfileView.as_view(), name='profile'),
-    path('addresses/', views.addresses_list, name='addresses_list'),
     # path('add_address/', views.add_address, name='add_address'),
     # path('choose-payment-method/', views.choose_payment_method, name='choose-payment-method'),
     # path('order-summary/', views.order_summary, name='order-summary'),
+
+    path('add_delivery_address/', add_delivery_address, name='add_delivery_address'),
+    path('edit_delivery_address/<int:address_id>/', edit_delivery_address, name='edit_delivery_address'),
+    path('delete_delivery_address/<int:address_id>/', delete_delivery_address, name='delete_delivery_address'),
+    
+    path('placeorder/', PlaceOrderAndPaymentView.as_view(), name='placeorder'),
+    path('order_list/', views.order_list, name='order_list'),
+    path('order_confirmation/', OrderConfirmationView.as_view(), name='order_confirmation'),
 
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

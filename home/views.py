@@ -1,11 +1,22 @@
 from django.shortcuts import render, redirect
+from .forms import DeliveryAddressForm
+from .models import Cart, Order, OrderItem
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views import View
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .models import OTP  
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django.conf import settings
 from django.core.mail import send_mail
-from .models import Category, Customer, Cart, Product
+from django.views.decorators.csrf import csrf_exempt
+from .models import Category, Cart, Product
 from .forms import CustomerRegistrationForm, ForgotPasswordForm, LoginForm
 from django.contrib import messages
 from django.db.models import Q
@@ -83,9 +94,6 @@ def add_to_cart(request):
     Cart(user=user, product=product).save()
     return redirect('/cart')
 
-from django.http import JsonResponse
-from django.db.models import Q
-from .models import Cart
 
 @login_required
 def show_cart(request):
@@ -120,10 +128,6 @@ def show_cart(request):
             totalitem = len(Cart.objects.filter(user=request.user))
             return render(request, 'app/emptycart.html', {'totalitem': totalitem})
 
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
-from django.db.models import Q
-from .models import Cart  # Import your Cart model here
 
 @login_required
 def update_cart(request):
@@ -160,8 +164,6 @@ def update_cart(request):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
-from django.views.decorators.csrf import csrf_exempt
-from .models import Cart  # Import your Cart model
 
 
 @login_required
@@ -181,11 +183,6 @@ def remove_cart(request):
 def buy_now(request):
     return render(request, 'app/buynow.html')
 
-from django.views import View
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib import messages
-from .models import OTP  
 
 class LogInView(View):
     def get(self, request):
@@ -307,42 +304,211 @@ def registration_success(request):
 
     return render(request, 'registration_success.html')
 
-@login_required
-def checkout(request):
-    totalitem = 0
+from django.shortcuts import render, redirect
+from .models import DeliveryAddress
+from .forms import DeliveryAddressForm
+
+from home.models import DeliveryAddress
+
+
+from django.shortcuts import render, redirect
+
+
+from .models import Cart
+
+def proceed_to_checkout(request):
     user = request.user
     addresses = DeliveryAddress.objects.filter(user=user)
     cart_items = Cart.objects.filter(user=user)
-    amount = 0.0
-    cart_product = [p for p in Cart.objects.all() if p.user == user]
-
-    if cart_product:
-        for p in cart_product:
-            tempamount = p.quantity * p.product.selling_price
-            amount += tempamount
-        totalamount = amount  # Remove shipping_amount from the total calculation
-        nptotal = round(totalamount / 132, 2)
-
-        if user.is_authenticated:
-            totalitem = len(Cart.objects.filter(user=user))
+    amount = sum(item.product.selling_price * item.quantity for item in cart_items)
+    
+    if cart_items.exists():
+        totalitem = cart_items.count()
         return render(request, 'app/checkout.html', {
             'addresses': addresses,
-            'totalamount': totalamount,
+            'totalamount': amount,
             'cart_items': cart_items,
             'totalitem': totalitem,
-            'nptotal': nptotal,
+            'nptotal': round(amount / 132, 2),
             'amount': amount
         })
     else:
-        messages.warning(request, "Please Select your Placed Address.")
-        return redirect('/address/')
+        messages.warning(request, "Your cart is empty.")
+        return redirect('home')
 
-from django.shortcuts import render, redirect
+
+
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms import DeliveryAddressForm
 from .models import DeliveryAddress
 
-def addresses_list(request):
-    addresses = DeliveryAddress.objects.filter(user=request.user)
-    return render(request, 'app/addresses_list.html', {'addresses': addresses})
+def add_delivery_address(request):
+    user_addresses = DeliveryAddress.objects.filter(user=request.user)
+    default_address = user_addresses.filter(is_default=True).first()
 
-def  orders(request):
-    pass
+    if default_address:
+        form = DeliveryAddressForm(request.POST or None, instance=default_address)
+    else:
+        form = DeliveryAddressForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+
+            if address.is_default:
+                user_addresses.exclude(pk=address.pk).update(is_default=False)
+
+            return redirect('proceed_to_checkout')
+
+    return render(request, 'app/delivery.html', {'form': form})
+
+
+def edit_delivery_address(request, address_id):
+    address = get_object_or_404(DeliveryAddress, pk=address_id, user=request.user)
+
+    if request.method == 'POST':
+        form = DeliveryAddressForm(request.POST, instance=address)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+
+            is_default = request.POST.get('is_default')
+            if is_default:
+                address.is_default = True
+                DeliveryAddress.objects.filter(user=request.user).exclude(pk=address.pk).update(is_default=False)
+            else:
+                address.is_default = False
+
+            address.save()
+            return redirect('proceed_to_checkout')
+    else:
+        form = DeliveryAddressForm(instance=address)
+
+    return render(request, 'app/edit_delivery_address.html', {'form': form, 'address_id': address_id})
+
+
+
+def delete_delivery_address(request, address_id):
+    if request.method == 'POST':
+        address = get_object_or_404(DeliveryAddress, pk=address_id, user=request.user)
+        
+        if address:
+            address.delete()
+            messages.success(request, 'Address deleted successfully.')
+    
+    return redirect('proceed_to_checkout')  # Redirect to an appropriate URL after address deletion
+
+from django.shortcuts import render, redirect
+from django.views import View
+from .models import Cart, Order, OrderItem, DeliveryAddress
+
+class PlaceOrderAndPaymentView(View):
+    template_name = 'app/place_order.html'
+
+    def get(self, request):
+        user = request.user
+
+        # Fetch cart items for the logged-in user
+        cart_items = Cart.objects.filter(user=user)
+        total_amount = sum(cart_item.product.selling_price * cart_item.quantity for cart_item in cart_items)
+
+        # Fetch all delivery addresses for the logged-in user
+        delivery_addresses = DeliveryAddress.objects.filter(user=user)
+
+        return render(request, self.template_name, {
+            'cart_items': cart_items,
+            'delivery_addresses': delivery_addresses,
+            'totalamount': total_amount
+        })
+
+    def post(self, request):
+        payment_method = request.POST.get('payment_method')
+        if payment_method:
+            if 'delivery_address_id' in request.POST:
+                return self.place_order_from_address(request, payment_method)
+            else:
+                return self.place_order_with_default_address(request, payment_method)
+        else:
+            return render(request, self.template_name, {'error_message': 'Please select a payment method.'})
+
+    def create_order(self, user, delivery_address, payment_method, cart_items):
+        new_order = Order.objects.create(
+            user=user,
+            shipping_address=delivery_address,
+            order_status='Pending',
+            total_amount=0
+        )
+
+        total_amount = 0
+        for cart_item in cart_items:
+            order_item = OrderItem.objects.create(
+                order=new_order,
+                product=cart_item.product,
+                quantity=cart_item.quantity
+            )
+            total_amount += cart_item.product.selling_price * cart_item.quantity
+
+        new_order.total_amount = total_amount
+        new_order.save()
+
+        return new_order
+
+    def place_order_from_address(self, request, payment_method):
+        delivery_address_id = request.POST.get('delivery_address_id')
+        delivery_address = DeliveryAddress.objects.get(id=delivery_address_id)
+        cart_items = Cart.objects.filter(user=request.user)
+
+        new_order = self.create_order(request.user, delivery_address, payment_method, cart_items)
+        self.process_cart_and_order(request.user, cart_items, new_order)
+        return redirect('order_confirmation')
+
+    def place_order_with_default_address(self, request, payment_method):
+        user = request.user
+        cart_items = Cart.objects.filter(user=user)
+        default_address = DeliveryAddress.objects.filter(user=user, is_default=True).first()
+
+        new_order = self.create_order(user, default_address, payment_method, cart_items)
+        self.process_cart_and_order(user, cart_items, new_order)
+        return redirect('order_confirmation')
+
+    def process_cart_and_order(self, user, cart_items, new_order):
+        cart_items.delete()
+        return redirect('home')
+
+
+class OrderConfirmationView(View):
+    def get(self, request):
+        cart_items = Cart.objects.filter(user=request.user)
+        return render(request, 'app/order_confirmation.html', {'cart_items': cart_items})
+
+    def post(self, request):
+        place_order_view = PlaceOrderAndPaymentView()
+
+        delivery_address_id = request.POST.get('delivery_address_id')
+        if delivery_address_id:
+            delivery_address = get_object_or_404(DeliveryAddress, id=delivery_address_id, user=request.user)
+            cart_items = Cart.objects.filter(user=request.user)  # Retrieve cart items again
+
+            new_order = place_order_view.create_order(request.user, delivery_address, 'cash_on_delivery', cart_items)
+            
+            if new_order:
+                place_order_view.process_cart_and_order(request.user, cart_items, new_order)
+                self.send_confirmation_email(request.user, new_order)  # Sending confirmation email
+                cart_items.delete()
+                messages.success(request, 'Orders confirmed successfully!')
+                return redirect('home')
+        
+        messages.error(request, 'Order placement was unsuccessful.')
+        return redirect('order_confirmation')
+
+    def send_confirmation_email(self, user, order):
+
+        print(f"Email sent to {user.email} for order {order.id} confirmation.")
+
+
+
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'app/order_list.html', {'orders': orders})

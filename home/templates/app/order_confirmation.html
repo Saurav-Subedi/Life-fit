@@ -1,0 +1,28 @@
+<!-- app/templates/app/order_confirmation.html -->
+
+{% extends 'app/base.html' %}
+{% block title %}Order Confirmation{% endblock title %}
+
+{% block content %}
+  <h2>Your Order Confirmation</h2>
+
+  {% if cart_items %}
+    <div>
+      <h3>Order Details:</h3>
+      <ul>
+        {% for cart_item in cart_items %}
+          <li>
+            <strong>{{ cart_item.product.title }}</strong><br>
+            Quantity: {{ cart_item.quantity }}<br>
+            Price: {{ cart_item.product.selling_price }}<br>
+            Total Price: {{ cart_item.total_price }}<br>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <hr>
+    <p>Thank you for your order!</p>
+  {% else %}
+    <p>No items in the cart</p>
+  {% endif %}
+{% endblock content %}

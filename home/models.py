@@ -2,10 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import random
 
-
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link to the User model
-
 class Brand(models.Model):
     name = models.CharField(max_length=80, null=False, blank=False)
     def __str__(self):
@@ -53,16 +49,6 @@ class Cart(models.Model):
         return str(self.id)
 
 
-
-STATUS_CHOICES = (
-    ('Accepted', 'Accepted'),
-    ('Packed', 'Packed'),
-    ('On The Way', 'On The Way'),
-    ('Delivered', 'Delivered'),
-    ('Cancel', 'Cancel'),
-)
-
-
 class Verification(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	token = models.CharField(max_length=150)
@@ -81,22 +67,15 @@ class OTP(models.Model):
         return self.otp_code == otp
 
 
-
-
 class ResetPasswordToken(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     token = models.CharField(max_length=32)
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    reset_password_token = models.CharField(max_length=32, blank=True, null=True)
-
-
-    def __str__(self):
-        return self.user.username
+from django.conf import settings
 
 class DeliveryAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     mobile_number = models.CharField(max_length=15)
     city = models.CharField(max_length=50)
@@ -108,3 +87,36 @@ class DeliveryAddress(models.Model):
     def __str__(self):
         return self.full_name
 
+
+from django.db import models
+ORDER_STATUSES = (
+    ('Pending', 'Pending'),
+    ('Processing', 'Processing'),
+    ('Shipped', 'Shipped'),
+    ('Delivered', 'Delivered'),
+)
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Product, through='OrderItem')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    shipping_address = models.ForeignKey(DeliveryAddress, on_delete=models.CASCADE)
+    order_status = models.CharField(max_length=20, choices=ORDER_STATUSES)
+    shipping_cost = models.FloatField(default=0.0)
+    total_amount = models.FloatField()  
+
+    def __str__(self):
+        return f"Order #{self.id} - User: {self.user.username}"
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"Order: {self.order.id}, Product: {self.product.name}, Quantity: {self.quantity}"
+
+    def __str__(self):
+        return f"Order: {self.order.id}, Product: {self.product.title}, Quantity: {self.quantity}"
