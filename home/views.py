@@ -362,7 +362,7 @@ def add_delivery_address(request):
 
             return redirect('proceed_to_checkout')
 
-    return render(request, 'app/delivery.html', {'form': form})
+    return render(request, 'app/add_delivery_address.html', {'form': form})
 
 
 def edit_delivery_address(request, address_id):
