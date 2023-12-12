@@ -222,6 +222,14 @@ class LogInView(View):
         else:
              return render(request, 'app/login.html', {'form': form})
 
+from django.contrib.auth import logout
+
+
+class LogOutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('home')
+    
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()

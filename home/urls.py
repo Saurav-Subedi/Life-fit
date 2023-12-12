@@ -5,7 +5,7 @@ from home import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView 
 from .forms import LoginForm, MyPasswordChangeForm
-from .views import CustomerRegistrationView, OTPVerificationView, OrderConfirmationView, PlaceOrderAndPaymentView, add_delivery_address, delete_delivery_address, edit_delivery_address  # Import the ForgotPasswordView
+from .views import CustomerRegistrationView, LogOutView, OTPVerificationView, OrderConfirmationView, PlaceOrderAndPaymentView, add_delivery_address, delete_delivery_address, edit_delivery_address  # Import the ForgotPasswordView
 
 
 
@@ -24,7 +24,7 @@ urlpatterns = [
     path('login/', views.LogInView.as_view(), name='login'),
     path('accounts/login/', views.LogInView.as_view(), name='login'),
 
-    path('logout/', LogoutView.as_view(), name='logout'), 
+    path('logout/', LogOutView.as_view(), name='logout'), 
 
     path('passwordchange/', auth_views.PasswordChangeView.as_view(template_name='app/passwordchange.html',form_class=MyPasswordChangeForm, success_url='/passwordchangedone/'), name='passwordchange'),
     path('passwordchangedone/', auth_views.PasswordChangeDoneView.as_view(template_name='app/passwordchangedone.html'), name='passwordchangedone'),
