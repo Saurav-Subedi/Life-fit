@@ -1,205 +1,135 @@
-/* styles.css */
+/* Reset some default browser styles */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+  line-height: 3;
+}
 
-/* Define styles for the main content area */
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  color: #0ede3b;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+header {
+  background-color: #09d643;
+  color: #fff;
+  padding: 10px 0;
+  max-width: 1600px;
+  margin: 0 auto;
+  height:1in;
+
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Main Content Styles */
 #main-content {
-    padding-top: 70px;
+  margin-top: 20px;
+  margin-top: 4cm;
 }
 
-/* Styles for the shopping cart items */
-.cart-item {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+/* Product Image Styles */
+.product-image {
+  max-width: 100%;
+  height: auto;
+  /* Add other styles as needed */
 }
 
-.cart-item img {
-    max-width: 150px;
-    max-height: 150px;
-    margin-right: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.cart-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow flex items to wrap to the next line on smaller screens */
+  /* margin-top: 1cm; */
 }
 
-.cart-item .item-details {
-    flex-grow: 1;
+.cart-container > div {
+  width: 48%; /* Adjust the width of each column */
+  margin-bottom: 20px;
+  /* margin-top: 1cm; */
 }
 
-.cart-item h5 {
-    font-size: 1.25rem;
+.cart-items {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.cart-item p {
-    font-size: 0.875rem;
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.cart-item .quantity-control {
-    display: flex;
-    align-items: center;
+.cart-table th, .cart-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
-.cart-item .quantity-control a {
-    cursor: pointer;
-    font-size: 1.25rem;
-    margin: 0 10px;
+.cart-table th {
+  background-color: #f2f2f2;
 }
 
-.cart-item .remove-item {
-    margin-top: 10px;
+.remove-item {
+  text-align: center;
 }
 
-.cart-item .item-price {
-    font-size: 1.25rem;
-    font-weight: bold;
+.remove-button {
+  background-color: #ff6464;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
-/* Styles for the total amount section */
+/* Total Amount Section Styles */
 #total-amount-section {
-    margin-top: 30px;
+  width: 100%;
 }
 
-#total-amount-section .total-amount {
-    font-size: 1.5rem;
-    font-weight: bold;
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
 }
 
-#total-amount-section a {
-    text-decoration: none;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+.card h3 {
+  color: #12db29;
 }
 
-/* Styles for the payment section */
-#payment-section {
-    margin-top: 30px;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-#payment-section .payment-image {
-    max-width: 100%;
+li {
+  margin-bottom: 10px;
 }
 
-#payment-section p {
-    font-size: 1rem;
-}
-/* Styles for the shopping cart items */
-.cart-item {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+a {
+  color: #3498db;
+  text-decoration: none;
 }
 
-.cart-item img {
-    max-width: 150px;
-    max-height: 150px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+a:hover {
+  text-decoration: underline;
 }
 
-.cart-item .item-details {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cart-item h5 {
-    font-size: 1.25rem;
-}
-
-.cart-item p {
-    font-size: 0.875rem;
-}
-
-.cart-item .quantity-control {
-    display: flex;
-    align-items: center;
-}
-
-.cart-item .quantity-control a {
-    cursor: pointer;
-    font-size: 1.25rem;
-    margin: 0 10px;
-}
-
-.cart-item .remove-item {
-    margin-top: 10px;
-}
-
-.cart-item .remove-button {
-    background-color: #ff0000; /* Add your preferred button styling */
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-}
-
-/* Other styles for total amount and payment sections... */
-/* Styles for the total amount section */
-#total-amount-section {
-    margin-top: 30px;
-}
-
-#total-amount-section .card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #f8f8f8;
-}
-
-#total-amount-section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-#total-amount-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#total-amount-section ul li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1rem;
-    margin-bottom: 10px;
-}
-
-#total-amount-section a {
-    display: inline-block;
-    text-decoration: none;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    margin-top: 15px;
-}
-
-/* Styles for the payment section */
-#payment-section {
-    margin-top: 30px;
-}
-
-#payment-section .card-body {
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
-}
-
-#payment-section h5 {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-}
-
-#payment-section .payment-image {
-    max-width: 100%;
-    display: block;
-    margin-top: 10px;
-}
-
-#payment-section p {
-    font-size: 1rem;
-    margin-top: 10px;
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .cart-container > div {
+      width: 100%; /* Make each column take full width on smaller screens */
+  }
 }

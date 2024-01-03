@@ -1,0 +1,107 @@
+
+body, h1, h2, h3, p, ul {
+    margin: 0;
+    padding: 0;
+    height: 1in;
+}
+
+/* Style the container */
+.container {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 4cm;
+}
+
+/* Style the product image */
+img {
+    max-width: 70%;
+    height: auto;
+}
+
+/* Style the navigation breadcrumb */
+h4 a {
+    text-decoration: none;
+    color: #059e05;
+}
+
+/* Style the product details */
+h4 span {
+    color: #333333;
+}
+
+hr {
+    border: 1px solid #ccc;
+}
+
+/* Style the price */
+h4 small {
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+
+/* Style the quantity control */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.quantity-adjust {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+/* Style the buttons */
+button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style the offers */
+h5 {
+    color: #333;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: auto;
+}
+
+li {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* Style the product description */
+p {
+    margin-top: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Style the links */
+a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}

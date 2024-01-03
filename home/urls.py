@@ -5,7 +5,7 @@ from home import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView 
 from .forms import LoginForm, MyPasswordChangeForm
-from .views import CustomerRegistrationView, LogOutView, OTPVerificationView, OrderConfirmationView, PlaceOrderAndPaymentView, add_delivery_address, delete_delivery_address, edit_delivery_address  # Import the ForgotPasswordView
+from .views import CustomerRegistrationView, LogOutView, OTPVerificationView, OrderConfirmationView, OrderListView, PlaceOrderAndPaymentView, ProductDetailView, add_delivery_address, delete_delivery_address, edit_delivery_address  # Import the ForgotPasswordView
 
 
 
@@ -51,8 +51,9 @@ urlpatterns = [
     path('delete_delivery_address/<int:address_id>/', delete_delivery_address, name='delete_delivery_address'),
     
     path('placeorder/', PlaceOrderAndPaymentView.as_view(), name='placeorder'),
-    path('order_list/', views.order_list, name='order_list'),
+
     path('order_confirmation/', OrderConfirmationView.as_view(), name='order_confirmation'),
+    path('orders/<int:pk>/', OrderListView.as_view(), name='order_list'),  # URL for OrderListView
 
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

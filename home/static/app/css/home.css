@@ -13,7 +13,7 @@
     scroll-behavior: smooth;
   }
   .intro{
-    background: grey;
+    background: rgb(19, 3, 241);
     color: white;
     padding: 15px 0 0 10%;
     height: 15px;
@@ -179,153 +179,131 @@
   }
 
 
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  * {
-    box-sizing: border-box;
-    margin-top: 0;
-  }
+/* Body styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  color: #333333;
+}
 
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-  .cart-icon {
-    font-size: 24px;
-    cursor: pointer;
-} 
-/* menu btn styling */
-.menu-btn{
+/* Header styles */
+.header {
+  background-color: #14d60a;
   color: #fff;
-  font-size: 23px;
+  padding: 10px 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100px;
+  margin: 0 auto;
+
+}
+
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Navigation links styles */
+.nav-list a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-list a:hover {
+  color: #ffd700; /* Change the color on hover */
+}
+
+/* Main content styles */
+.main-content {
+  padding: 20px;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  margin-bottom: 20px;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product-list {
+  list-style-type: none;
+}
+
+.product-list li {
+  margin-bottom: 5px;
+}
+
+/* Scroll-up button styles */
+.scroll-up-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
   cursor: pointer;
   display: none;
-} 
-.scroll-up-btn{
-  position: fixed;
-  height: 45px;
-  width: 42px;
-  background: crimson;
-  right: 30px;
-  bottom: 10px;
-  text-align: center;
-  line-height: 45px;
-  color: #fff;
-  z-index: 9999;
-  font-size: 30px;
-  border-radius: 6px;
-  border-bottom-width: 2px;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-.scroll-up-btn.show{
-  bottom: 30px;
-  opacity: 1;
-  pointer-events: auto;
-}
-.scroll-up-btn:hover{
-  filter: brightness(90%);
 }
 
-  ul {
-    list-style: none;
-    padding: 0;
+/* Apply styles to the scroll-up button icon */
+.scroll-up-btn i {
+  font-size: 24px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .nav-list {
+    flex-direction: column;
+  }
+
+  .nav-item {
     margin: 0;
+    margin-bottom: 10px;
   }
-  ul :hover{
-    color: #007bff;
-    text-decoration: underline;
-    padding: 1px;
-  }
+}
 
-  header {
-    background-color:rgb(51, 231, 168);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 15px 10px;
-  }
-  .one{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  
-  .header .content-holder {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content:space-between;
-    padding: 0 145px;
-  }
-  
-  .nav-list li {
-    padding: 0 18px;
-  }
-  
-  nav li {
-    display: inline-block;
-    list-style: none;
-  }
-  
-  nav li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 25px;
-    font-weight: 500;
-  }
-  nav li a:hover {
-    text-decoration: underline;
-    color: #007bff;
-  }
-  
-  nav li a:active {
-    color: #daac00;
-    text-decoration: none;
-    background-color: #ffffff;
-    font-weight: bolder;
-
-  }
-  .search-box.search-btn input{
-    border: none;
-    outline: none;
-  }
-  .navbar .menu li{
-    list-style: none;
-    display: inline-block;
-}
-.navbar .menu li a{
-    display: block;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: 25px;
-    transition: color 0.3s ease;
-}
-.navbar .menu li a:hover{
-    color: crimson;
-}
-.navbar.sticky .menu li a:hover{
-    color: #fff;
-}
 
   .card{
     background: rgb(218, 217, 217);

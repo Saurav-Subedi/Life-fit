@@ -1,20 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Order List</title>
-</head>
-<body>
-    <h1>Orders</h1>
-    <ul>
+{% extends 'app/base.html' %}
+{% block title %}
+  Order Details
+{% endblock title %}
+
+{% block main-content %}
+  <h2>{{ product.title }} Orders</h2>
+
+  {% if orders %}
+    <div class="ordered-products">
+      <h3>Ordered Products</h3>
+      <div class="gallery">
         {% for order in orders %}
-            <li>
-                <strong>Order ID:</strong> {{ order.id }}<br>
-                <strong>Status:</strong> {{ order.order_status }}<br>
-                <!-- Add other order details as needed -->
-            </li>
-        {% empty %}
-            <li>No orders found.</li>
+          <div class="content">
+            <img src="{{ order.product.product_image.url }}" alt="">
+            <h3>{{ order.product.title }}</h3>
+
+            <!-- Updated status display using conditional statements -->
+            {% if order.order_status == 'Pending' %}
+              <p>Status: <span style="color: orange;">{{ order.order_status }}</span></p>
+            {% elif order.order_status == 'Processing' %}
+              <p>Status: <span style="color: blue;">{{ order.order_status }}</span></p>
+            {% elif order.order_status == 'Shipped' %}
+              <p>Status: <span style="color: green;">{{ order.order_status }}</span></p>
+            {% elif order.order_status == 'Delivered' %}
+              <p>Status: <span style="color: #008000;">{{ order.order_status }}</span></p>
+            {% else %}
+              <p>Status: Unknown</p>
+            {% endif %}
+            
+            <p>Quantity: {{ order.quantity }}</p>
+            <p>Total Price: रु.{{ order.total_price }}</p>
+            <!-- Display other details of the ordered product -->
+          </div>
         {% endfor %}
-    </ul>
-</body>
-</html>
+      </div>
+    </div>
+  {% else %}
+    <p>No orders found for this product.</p>
+  {% endif %}
+  
+  <!-- Additional content or customization as needed -->
+{% endblock main-content %}

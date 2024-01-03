@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import DeliveryAddressForm
-from .models import Cart, Order, OrderItem
+from .models import ORDER_STATUSES, Cart, Order, OrderItem
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views import View
@@ -28,6 +28,12 @@ from django.core.mail import send_mail
 from .models import OTP
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
+from django.views import View
+from django.db.models import Q
+from .models import OrderItem, Cart, Product  # Import your models here
+
+# Rest of your code...
 
 
 def search_posts(request):
@@ -115,7 +121,7 @@ def show_cart(request):
                 'total_price': tempamount
             })
         
-        totalamount = amount + shipping_amount
+        totalamount = amount
 
         return render(request, 'app/addtocart.html', {
             'carts': cart_items,
@@ -514,9 +520,32 @@ class OrderConfirmationView(View):
     def send_confirmation_email(self, user, order):
 
         print(f"Email sent to {user.email} for order {order.id} confirmation.")
+ 
+class OrderListView(View):
+    def get(self, request, pk):
+        totalitem = 0
+        product = Product.objects.get(pk=pk)
+        item_already_in_cart = False
+        
+        # Assuming you're retrieving orders related to the current user
+        if request.user.is_authenticated:
+            totalitem = len(Cart.objects.filter(user=request.user))
+            item_already_in_cart = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
+            # Retrieve orders related to the current user and product
+            orders = OrderItem.objects.filter(product=product, order__user=request.user).select_related('order')
+            
+            # Calculate total price for each order item and include order status
+            for order_item in orders:
+                order_item.total_price = order_item.quantity * order_item.product.selling_price
+                order_item.order_status = order_item.order.order_status  # Include order status
+                
+        else:
+            orders = None  # If not authenticated, set orders to None or an empty queryset
 
-
-
-def order_list(request):
-    orders = Order.objects.all()
-    return render(request, 'app/order_list.html', {'orders': orders})
+        return render(request, 'app/order_list.html', {
+            'product': product,
+            'item_already_in_cart': item_already_in_cart,
+            'totalitem': totalitem,
+            'orders': orders,  # Pass the orders related to this product to the template
+            'order_statuses': ORDER_STATUSES  # Pass the order statuses to the template
+        })

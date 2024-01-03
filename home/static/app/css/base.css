@@ -1,0 +1,99 @@
+.navbar {
+  max-width:800px;
+  margin: 0 auto;  
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul:hover {
+    color: #007bff;
+    text-decoration: underline;
+    padding: 1px;
+  }
+  
+  header {
+    background-color: rgb(51, 231, 168);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0; /* Increased padding for a more prominent header */
+  }
+  
+  .one {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .header .content-holder {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px; /* Increased padding for a more spacious look */
+  }
+  
+  .nav-list li {
+    padding: 15px; /* Adjusted padding for better spacing */
+  }
+  
+  nav li {
+    display: inline-block;
+    list-style: none;
+  }
+  
+  nav li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 22px; /* Slightly reduced font size for better readability */
+    font-weight: 600; /* Increased font weight for a bolder look */
+  }
+  
+  nav li a:hover {
+    text-decoration: underline;
+    color: #007bff;
+  }
+  
+  nav li a:active {
+    color: #daac00;
+    text-decoration: none;
+    background-color: #ffffff;
+    font-weight: bolder;
+  }
+  
+  .search-box .search-btn input {
+    border: none;
+    outline: none;
+  }
+  
+  .search-box {
+    margin-bottom: 15px; /* Adjusted margin for better spacing */
+    border-radius: 500px;
+  }
+  
+  .navbar .menu li {
+    list-style: none;
+    display: inline-block;
+  }
+  
+  .navbar .menu li a {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px; /* Slightly reduced margin for better spacing */
+    transition: color 0.3s ease;
+  }
+  
+  .navbar .menu li a:hover {
+    color: crimson;
+  }
+  
+  .navbar.sticky .menu li a:hover {
+    color: #fff;
+  }
+  

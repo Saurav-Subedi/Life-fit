@@ -1,0 +1,52 @@
+/* app/css/delivery.css */
+
+/* Global Form Styles */
+form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="tel"] /* Assuming mobile_number is of type tel */,
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Button Styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Specific Styles for DeliveryAddressForm */
+#id_full_name,
+#id_mobile_number,
+#id_city,
+#id_area,
+#id_address,
+#id_landmark {
+    margin-bottom: 15px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    form {
+        width: 80%;
+    }
+}

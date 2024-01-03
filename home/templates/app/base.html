@@ -13,84 +13,64 @@
   {% endblock %}
   
 
-</head>
-<body>
-  <div class="scroll-up-btn">
-    <i class="fas fa-angle-up"></i>
-  </div>
   <header class="header">
     <div class="content-holder">
       <div class="one">
         <nav class="navbar">
           <ul class="nav-list">
-            <div class="logo">
+            <li class="logo">
               <a href="{% url 'home' %}">
-              <img height="35" width="70" src="{% static 'app/images/logo1.png' %}" alt="Logo">
+                <img height="35" width="70" src="{% static 'app/images/logo1.png' %}" alt="Logo">
               </a>
-            </div>
-              <ul>
+            </li>
 
-                <li>
-                  <a href="{% url 'home' %}">Home</a>
-                </li>
+            <li>
+              <a href="{% url 'home' %}">Home</a>
+            </li>
 
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle hide-button-text" href="#" id="navbarDropdown" role="button"
-                      aria-haspopup="true" aria-expanded="false">
-                      Categories
-                  </a>
-                  <div class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
-                      {% for category in categories %}
-                          <a class="dropdown-item {% if category.post_count == 0 %}disabled{% endif %}"
-                              href="{% url 'category' category.slug %}">
-                              {{ category.name }}
-                              {% if category.post_count == 0 %}
-                                  <span class="custom-badge">No Posts</span>
-                              {% endif %}
-                          </a>
-                      {% endfor %}
-                  </div>
-              </li>
-              <li>
-              </nav>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle hide-button-text" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Categories
+              </a>
+              <div class="dropdown-menu custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for category in categories %}
+                <a class="dropdown-item {% if category.post_count == 0 %}disabled{% endif %}" href="{% url 'category' category.slug %}">
+                  {{ category.name }}
+                  {% if category.post_count == 0 %}
+                  <span class="custom-badge">No Posts</span>
+                  {% endif %}
+                </a>
+                {% endfor %}
+              </div>
+            </li>
 
-                 <nav class="navbar">
-              <div class="content-holder">
-                <ul class="nav-list">
-                  <form id="search-form" method="GET" action="{% url 'search' %}" class="form-inline mx-auto">
-                    {% csrf_token %}
-                    <input type="text" id="search-input" name="query" class="form-control mr-sm-2" placeholder="Search...">
-                    <button class="btn btn-outline-light my-2 my-sm-0 hide-button-text" type="submit">Search</button>
-                </form>
-                
+            <li>
+              <form id="search-form" method="GET" action="{% url 'search' %}" class="form-inline mx-auto">
+                {% csrf_token %}
+                <input type="text" id="search-input" name="query" class="form-control mr-sm-2" placeholder="Search...">
+                <button class="btn btn-outline-light my-2 my-sm-0 hide-button-text" type="submit">Search</button>
+              </form>
+            </li>
 
-            <nav class="navbar">
-              <div class="content-holder">
-                <div class="one">
-                <ul class="nav-list">
+            <li>
               {% if request.user.is_authenticated %}
-                {% comment %} <li><a href="{% url 'profile' %}"> Profile</a></li> {% endcomment %}
-                <li><a href="{% url 'order_list' %}"> Orders </a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-                
-                <li><a href="{% url 'showcart' %}">
-                  {{totalitem}}
-                  <span class="visually-hidden">cart</span>
-                </span></a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}">login</a></li>
-
-            <li><a href="{% url 'customerregistration' %}">Signup</a></li>
-            {% endif %}
+              
+              <a href="{% url 'order_list' pk=1 %}">Order</a>
+              <a href="{% url 'logout' %}">Logout</a>
+              <a href="{% url 'showcart' %}">
+                {{totalitem}}
+                <span class="visually-hidden">cart</span>
+              </a>
+              {% else %}
+              <a href="{% url 'login' %}">Login</a>
+              <a href="{% url 'customerregistration' %}">Signup</a>
+              {% endif %}
+            </li>
           </ul>
-        </div>
-      </nav>
- 
+        </nav>
       </div>
     </div>
-  </div>
-</div>
-</header>
+  </header>
 
   {% block banner_slider %} {% endblock banner_slider %}
   {% block livesale %} {% endblock livesale %}

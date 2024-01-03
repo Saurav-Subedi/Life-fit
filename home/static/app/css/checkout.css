@@ -1,0 +1,95 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h4 {
+    color: #333;
+  }
+  
+  hr {
+    border: 1px solid #ddd;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+  }
+  
+  .card h5 {
+    color: #333;
+  }
+  
+  .card p {
+    color: #555;
+  }
+  
+  .card bg-dark {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .text-end {
+    text-align: end;
+  }
+  
+  .mb-2 {
+    margin-bottom: 2rem;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button[type="submit"] {
+    background-color: teal;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #00796b;
+  }
+  
+  /* Add your own styles for the form inputs, labels, and other elements as needed */
+  form {
+    margin-top: 20px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  .alert {
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #f44336;
+    color: #fff;
+    border-radius: 5px;
+  }
+  
+  .alert button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .alert button:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Mobile{% endblock title %}
+{% block main-content %}
+<div>
+    <div>
+        <div>
+            <div>
+                
+                <a href="{% url 'mobile' %}" aria-current="true">All
+                    Mobile</a>
+                    {% for brand in brand %}
+                <a href="{% url 'mobile' %}?brand={{brand.name}}" class="{% if request.path == "mobile/?brand={{brand.name}}" %} active bg-primary fw-bold{% endif %}"
+                    aria-current="true">{{brand.name}}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <div>
+                {% for product in mobile %}
+                <div>
+                    <div>
+                        <a href="{% url 'product-detail' product.id %}" style="overflow: hidden;">
+                            <div>
+                                <img class="" src="{{product.product_image.url}}" alt="" height="200px"><br>
+                                <span >{{product.title}}</span><br>
+                                <span>रु. {{product.discounted_prie}}</span>
+                            </div>
+                            <small>रु. {{product.selling_price}}</small>
+                        </a>
+                    </div>
+                  </div>
+                {% empty %}
+                <h3>Sorry, There Is No Item's.......</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock main-content %}
