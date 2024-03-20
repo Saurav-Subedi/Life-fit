@@ -3,13 +3,15 @@ body, h1, h2, h3, p, ul, li {
   margin: 0;
   padding: 0;
   line-height: 3;
+  
 }
 
 /* Global Styles */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f8f8f8;
-  color: #0ede3b;
+  color: #dcdfe8;
+  font-display: black;
 }
 
 .container {
@@ -19,20 +21,7 @@ body {
 }
 
 /* Header Styles */
-header {
-  background-color: #09d643;
-  color: #fff;
-  padding: 10px 0;
-  max-width: 1600px;
-  margin: 0 auto;
-  height:1in;
 
-}
-
-header a {
-  color: #fff;
-  text-decoration: none;
-}
 
 /* Main Content Styles */
 #main-content {
@@ -71,13 +60,13 @@ header a {
 }
 
 .cart-table th, .cart-table td {
-  border: 1px solid #ddd;
+  border: 1px solid #279247;
   padding: 8px;
   text-align: left;
 }
 
 .cart-table th {
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 .remove-item {
@@ -98,15 +87,15 @@ header a {
 }
 
 .card {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #dce9e2;
+  border: 1px solid #100909;
   border-radius: 5px;
   padding: 15px;
   margin-top: 20px;
 }
 
 .card h3 {
-  color: #12db29;
+  color: #279247;
 }
 
 ul {
@@ -119,7 +108,7 @@ li {
 }
 
 a {
-  color: #3498db;
+  color: #13e716;
   text-decoration: none;
 }
 

@@ -1,157 +1,178 @@
 /* Reset some default styles */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body styles */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
-}
-
-/* Header styles */
-.header {
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 10px 0;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* max-width: 400px;
-  margin: 0 auto; */
-}
-
-.nav-list {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-}
-
-.nav-item {
-  margin-right: 15px;
-}
-
-.logo img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Navigation links styles */
-.nav-list a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.nav-list a:hover {
-  color: #ffd700; /* Change the color on hover */
-}
-
-/* Main content styles */
-.main-content {
-  padding: 20px;
-}
-
-/* Add this to your CSS file or in a <style> tag within the HTML file */
-
-/* Add this to your CSS file or in a <style> tag within the HTML file */
-
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px 0;
-  height: fit-content;
-}
-
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.footer-section {
-  flex: 1;
-  margin: 0 10px;
-}
-
-h3 {
-  color: #ffd700; /* Golden color for headings */
-}
-
-p {
-  font-size: 16px;
-}
-
-.social-icons a {
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 24px;
-  color: #fff;
-  transition: color 0.3s ease-in-out;
-}
-
-.social-icons a:hover {
-  color: #ffd700; /* Golden color on hover */
-}
-
-.product-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.product-list li {
-  font-weight: bold;
-}
-
-.footer-bottom {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.footer-bottom p {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.footer-bottom p:last-child {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-
-/* Scroll-up button styles */
-.scroll-up-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-}
-
-/* Apply styles to the scroll-up button icon */
-.scroll-up-btn i {
-  font-size: 24px;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .nav-list {
-    flex-direction: column;
-  }
-
-  .nav-item {
     margin: 0;
-    margin-bottom: 10px;
+    padding: 0;
+    box-sizing: border-box;
   }
-}
+  
+  /* Body styles */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  /* Header styles */
+  .header {
+    background-color: #09d643;
+    color: #fff;
+    padding: 10px 0;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* max-width: 400px;
+    margin: 0 auto; */
+  }
+  
+  .nav-list {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-item {
+    margin-right: 15px;
+  }
+  
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Navigation links styles */
+  .nav-list a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-list a:hover {
+    color: #ffd700; /* Change the color on hover */
+  }
+  
+  /* Main content styles */
+  .main-content {
+    padding: 20px;
+  }
+  
+ 
+  
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    height: fit-content;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-section {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  h3 {
+    color: #ffd700; /* Golden color for headings */
+  }
+  
+  p {
+    font-size: 16px;
+  }
+  
+  .social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 24px;
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .social-icons a:hover {
+    color: #ffd700; /* Golden color on hover */
+  }
+  
+  .product-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-list li {
+    font-weight: bold;
+  }
+  
+  .footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .footer-bottom p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .footer-bottom p:last-child {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  
+  /* Scroll-up button styles */
+  .scroll-up-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* Apply styles to the scroll-up button icon */
+  .scroll-up-btn i {
+    font-size: 24px;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .nav-list {
+      flex-direction: column;
+    }
+  
+    .nav-item {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+  }
+  /* Add this CSS code */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f8f8;
+  }
+  

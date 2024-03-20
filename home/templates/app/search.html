@@ -1,13 +1,47 @@
-{% comment %} {% extends 'app/base.html' %}
+{% extends 'app/base.html' %}
 {% load static %}
+
 {% block title %}Search Results{% endblock title %}
 
 {% block additional_head %}
 <link rel="stylesheet" href="{% static 'app/css/home.css' %}">
-<link rel="stylesheet" href="{% static 'app/css/search.css' %}">
-{% endblock %}{% endcomment %}
+{% endblock %}
 
+{% block main-content %}
+<div class="scroll-up-btn">
+  <i class="fas fa-angle-up"></i>
+</div>
+<div class="intro">
+  <div class="logo">
+    <img src="{% static '' %}" alt="Logo">
+  </div>
+</div>
+
+<h1>Search Results for "{{ query }}"</h1>
+
+{% if results %}
+  <div id="content">
+    <div class="gallery">
+      {% for product in results %}
+        <div class="content">
+          <a href="{% url 'product-detail' product.id %}">
+            <img src="{{ product.product_image.url }}" alt="">
+            <h3>{{ product.title }}</h3>
+            {{ product.short_description|safe }}
+            <h6>रु.{{ product.selling_price }}</h6>
+            <button class="buy-{{ forloop.counter }}">Buy Now</button>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+  <p>No results found.</p>
+{% endif %}
+{% endblock %}
+{% comment %} 
 {% block content %} 
+
 
     <h1>Search Results for "{{ query }}"</h1>
     
@@ -27,4 +61,5 @@
     {% endif %}
 
 
-  {%endblock content %}
+  {%endblock content %} {% endcomment %}
+  
